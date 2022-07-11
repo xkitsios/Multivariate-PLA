@@ -22,6 +22,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
+import math
 from numbers import Number
 from collections import namedtuple
 
@@ -133,9 +134,11 @@ class Interval(namedtuple('IntervalBase', ['begin', 'end', 'data'])):
     def is_null(self):
         """
         Whether this equals the null interval.
-        :return: True if end <= begin else False
+        :return: True if end < begin else False
         :rtype: bool
         """
+        if math.isclose(self.begin, self.end):
+            return False
         return self.begin > self.end
 
     def length(self):
